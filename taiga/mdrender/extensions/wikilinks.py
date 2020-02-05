@@ -54,8 +54,9 @@ class WikiLinksPattern(Pattern):
         label = m.group(2).strip()
 
         # `project` could be other object (!)
-        slug = getattr(self.project, "slug")
-        if not slug:
+        if hasattr(self.project, "slug"):
+            slug = getattr(self.project, "slug")
+        else:
             project = getattr(self.project, "project")
             slug = getattr(project, "slug")
             if not slug:
